@@ -247,9 +247,9 @@ export const products = [
     featured: false,
   },
   {
-    id: 'sneakers',
-    title: 'Sneakers',
-    price: 20000,
+    id: 'Quality Pallaso',
+    title: 'Quality Pallaso',
+    price: 18000,
     category: 'female-wears',
     size: '36-42',
     description: 'Trendy sneakers designed for comfort, movement, and daily style.',

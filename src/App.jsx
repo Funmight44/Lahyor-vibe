@@ -28,11 +28,7 @@ function App() {
             <div className="footer-links">
               <Link to="/contact">Contact</Link>
               <Link to="/shop">Shop</Link>
-              <a
-                href="https://wa.me/2347067325018?text=Hello%20Lahyor%20Ventures%2C%20I%20would%20like%20to%20place%20an%20order."
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href="https://wa.me/?text=Hello%20Lahyor%20Ventures%2C%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noreferrer">
                 WhatsApp
               </a>
             </div>

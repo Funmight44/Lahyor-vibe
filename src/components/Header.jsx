@@ -19,7 +19,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container nav-shell">
         <Link to="/" className="brand" onClick={closeMenu}>
-          <img src="/images/lv-logo.svg" alt="LV logo" className="brand-logo" />
+          <img src="/images/logo.png" alt="Lahyor Ventures Logo" style={{ width: '70px', height: 'auto' }} />
           <span>Lahyor Ventures</span>
         </Link>
 

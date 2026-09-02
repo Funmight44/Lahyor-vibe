@@ -113,21 +113,21 @@ export const products = [
   },
   {
     id: 'decoration-001',
-    title: 'Birthday Balloon Decoration',
-    price: 35000,
+    title: 'Wedding venue decoration',
+    price: 350000,
     category: 'decorations',
     size: 'Standard',
     description:
-      'A colorful balloon decoration setup designed to create a beautiful and festive atmosphere for birthday celebrations.',
+      'A colorful flower decoration setup designed to create a beautiful and warm atmosphere for wedding celebrations.',
     imgpath:
-      'https://images.unsplash.com/photo-1769867627944-c61de54f084e?auto=format&fit=crop&w=900&q=80',
+      '/images/pexels-mahmoud-yahyaoui-30325201.jpg',
     inStock: true,
     featured: true,
   },
   {
     id: 'decoration-002',
     title: 'Wedding Reception Decoration',
-    price: 150000,
+    price: 500000,
     category: 'decorations',
     size: 'Large',
     description:
@@ -140,7 +140,7 @@ export const products = [
   {
     id: 'decoration-003',
     title: 'Baby Shower Decoration',
-    price: 60000,
+    price: 200000,
     category: 'decorations',
     size: 'Standard',
     description:
@@ -153,7 +153,7 @@ export const products = [
   {
     id: 'decoration-004',
     title: 'Balloon Arch Decoration',
-    price: 45000,
+    price: 300000,
     category: 'decorations',
     size: 'Standard',
     description:
@@ -166,7 +166,7 @@ export const products = [
   {
     id: 'decoration-005',
     title: 'Bridal Shower Decoration',
-    price: 75000,
+    price: 150000,
     category: 'decorations',
     size: 'Standard',
     description:
@@ -179,7 +179,7 @@ export const products = [
   {
     id: 'decoration-006',
     title: 'Birthday Backdrop Decoration',
-    price: 55000,
+    price: 95000,
     category: 'decorations',
     size: 'Standard',
     description:

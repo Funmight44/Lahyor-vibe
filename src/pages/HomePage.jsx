@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import FAQ from '../components/FAQ';
 import ProductCard from '../components/ProductCard';
 import { categoryOptions, products } from '../data/products';
 
@@ -129,6 +130,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <FAQ />
     </main>
   );
 }

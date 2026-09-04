@@ -9,7 +9,7 @@ export function CartProvider({ children }) {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
-    } catch (error) {
+    } catch {
       return [];
     }
   });
@@ -68,6 +68,10 @@ export function CartProvider({ children }) {
     setCart((currentCart) => currentCart.filter((item) => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -79,6 +83,7 @@ export function CartProvider({ children }) {
       addToCart,
       updateQuantity,
       removeProduct,
+      clearCart,
     }),
     [cart, cartCount, subtotal],
   );
@@ -86,6 +91,7 @@ export function CartProvider({ children }) {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCart() {
   const context = useContext(CartContext);
 

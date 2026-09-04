@@ -1,11 +1,33 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
 
 export default function CartPage() {
-  const { cart, subtotal, updateQuantity, removeProduct } = useCart();
+  const { cart, subtotal, updateQuantity, removeProduct, clearCart } = useCart();
+  const [customerDetails, setCustomerDetails] = useState({ customerName: '', phone: '', email: '' });
+  const [submissionState, setSubmissionState] = useState({ status: 'idle', orderId: '', message: '' });
 
   const cartTotalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (submissionState.status === 'success') {
+    return (
+      <main className="page-shell">
+        <section className="section-block top-offset">
+          <div className="container empty-state narrow-state order-success-page" role="status">
+            <p className="eyebrow">Order received</p>
+            <h1>Thank you for your order</h1>
+            <div className="order-success">
+              <strong>Your order has been received.</strong>
+              <span>Order ID: {submissionState.orderId}</span>
+              <small>Lahyor Ventures will follow up with you about your order.</small>
+            </div>
+            <Link to="/shop" className="primary-btn">Continue shopping</Link>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   if (cart.length === 0) {
     return (
@@ -37,6 +59,63 @@ export default function CartPage() {
   ].join('\n');
 
   const whatsappLink = `https://wa.me/2347067325018?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const handleDetailChange = (event) => {
+    const { name, value } = event.target;
+    setCustomerDetails((currentDetails) => ({ ...currentDetails, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const webhookUrl = import.meta.env.VITE_N8N_ORDER_WEBHOOK_URL;
+
+    if (!webhookUrl) {
+      setSubmissionState({
+        status: 'error',
+        orderId: '',
+        message: 'Online ordering is not configured yet. Please use WhatsApp or try again later.',
+      });
+      return;
+    }
+
+    const orderId = `LV-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    const orderPayload = {
+      orderId,
+      ...customerDetails,
+      products: cart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      total: subtotal,
+      orderDate: new Date().toISOString(),
+      status: 'New',
+    };
+
+    setSubmissionState({ status: 'submitting', orderId: '', message: '' });
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Webhook request failed');
+      }
+
+      clearCart();
+      setSubmissionState({ status: 'success', orderId, message: '' });
+    } catch {
+      setSubmissionState({
+        status: 'error',
+        orderId: '',
+        message: 'We could not submit your order. Please check your connection and try again.',
+      });
+    }
+  };
 
   return (
     <main className="page-shell">
@@ -117,6 +196,55 @@ export default function CartPage() {
             >
               Order on WhatsApp
             </a>
+
+            <div className="checkout-panel">
+              <p className="eyebrow">Checkout</p>
+              <h2>Place your order</h2>
+              <p className="checkout-intro">Enter your details and we will receive your order request.</p>
+
+              <form className="checkout-form" onSubmit={handleSubmit}>
+                  <label htmlFor="customerName">Full name</label>
+                  <input
+                    id="customerName"
+                    name="customerName"
+                    type="text"
+                    autoComplete="name"
+                    value={customerDetails.customerName}
+                    onChange={handleDetailChange}
+                    required
+                  />
+
+                  <label htmlFor="phone">Phone number</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    value={customerDetails.phone}
+                    onChange={handleDetailChange}
+                    required
+                  />
+
+                  <label htmlFor="email">Email address</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    value={customerDetails.email}
+                    onChange={handleDetailChange}
+                    required
+                  />
+
+                  {submissionState.status === 'error' && (
+                    <p className="form-message error-message" role="alert">{submissionState.message}</p>
+                  )}
+
+                  <button type="submit" className="primary-btn block-btn" disabled={submissionState.status === 'submitting'}>
+                    {submissionState.status === 'submitting' ? 'Sending order...' : 'Submit order'}
+                  </button>
+              </form>
+            </div>
           </aside>
         </div>
       </section>

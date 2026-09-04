@@ -809,6 +809,75 @@ button:disabled {
   margin-top: 1rem;
 }
 
+.checkout-panel {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.checkout-panel h2 {
+  margin: 0;
+}
+
+.checkout-intro {
+  margin: 0.6rem 0 1.2rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.checkout-form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.checkout-form label {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 0.75rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+}
+
+.form-message {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+}
+
+.error-message {
+  color: var(--error);
+}
+
+.order-success {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+  border: 1px solid rgba(49, 108, 75, 0.25);
+  border-radius: 12px;
+  background: rgba(49, 108, 75, 0.08);
+  color: var(--success);
+}
+
+.order-success-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.order-success-page .order-success {
+  text-align: left;
+}
+
+.order-success span,
+.order-success small {
+  color: var(--text);
+}
+
 .contact-list {
   display: grid;
   gap: 0.7rem;

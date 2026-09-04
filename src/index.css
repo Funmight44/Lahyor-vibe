@@ -430,7 +430,12 @@ button:disabled {
   color: var(--primary-dark);
 }
 
-.product-actions,
+.product-actions{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .cart-controls,
 .detail-meta,
 .summary-row,
@@ -447,6 +452,7 @@ button:disabled {
 
 .product-actions .primary-btn,
 .product-actions .secondary-btn {
+  font-size: 15px;
   flex: 1;
 }
 
@@ -455,10 +461,10 @@ button:disabled {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  background: linear-gradient(135deg, #f4ebe1, #f9f5f3);
+  background: linear-gradient(135deg, #f4ebe1, #f9f5f3); 
   border: 1px solid var(--line);
   border-radius: 24px;
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem 1.75rem; 
 }
 
 .feature-card {

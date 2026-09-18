@@ -24,7 +24,7 @@ function App() {
         </Routes>
         <footer className="site-footer">
           <div className="container footer-grid">
-            <div className="footer-brand">
+            <div className="footer-brand" >
               <span className="brand-mark" aria-hidden="true">LV</span>
               <div>
                 <h3>Lahyor Ventures</h3>

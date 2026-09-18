@@ -19,8 +19,8 @@ export default function Header() {
     <header className="site-header">
       <div className="container nav-shell">
         <Link to="/" className="brand" onClick={closeMenu}>
-          <img src="/images/logo.png" alt="Lahyor Ventures Logo" style={{ width: '70px', height: 'auto' }} />
-          <span>Lahyor Ventures</span>
+          <span className="brand-mark" aria-hidden="true">LV</span>
+          <span className="brand-text">Lahyor Ventures</span>
         </Link>
 
         <button
